@@ -1,7 +1,7 @@
 CC=gcc
 CXX=g++
-#CFLAGS= -Wall -O3 -g #-pg
-CFLAGS= -Wall -O3 -fopt-info-optimized
+CFLAGS= -Wall -O3 -g -pg
+# CFLAGS= -Wall -O3 -fopt-info-optimized
 CLIBS= -lm -lpthread
 #LAPACK=-L/usr/lib/atlas/sse -llapack -lblas
 #LAPACK=-L/usr/local/GotoBLAS2/lib -lgoto2 -lpthread -lgfortran
