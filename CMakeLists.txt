@@ -9,14 +9,16 @@ set(PROJECT_VERSION
 
 
 cmake_minimum_required (VERSION 2.8)
+list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake)
+
 include(CheckCXXCompilerFlag)
 include(CheckCCompilerFlag)
 include(CheckFunctionExists)
 
 
-## Load CMAKE configuration from environment variables
-set( CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} )
-set( CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH} )
+# ## Load CMAKE configuration from environment variables
+# set( CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} )
+# set( CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH} )
 
 ## Project Output Paths
 SET(MAINFOLDER ${PROJECT_SOURCE_DIR})
@@ -42,29 +44,23 @@ option (ENABLE_MPI "Enable MPI support" NO)
 #     endif (OPENMP_FOUND)
 # endif(USE_OPENMP)
 
-## Packages
+## Dependencies
 find_package(PkgConfig REQUIRED)
+find_package(CasaCore REQUIRED)
+find_package(LAPACK REQUIRED)
+find_package(BLAS REQUIRED)
 
-
-# Search Glib
 pkg_check_modules(GLIB_PKG glib-2.0)
 if (GLIB_PKG_FOUND)
     include_directories(${GLIB_PKG_INCLUDE_DIRS})
 endif()
 
 
-# Find Packages
-find_package(LAPACK REQUIRED)
-find_package(BLAS REQUIRED)
 
-# Set libs
+## Set libs
 set(lapackblas_libraries ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
-
 ## Set flags
 set (CMAKE_CXX_FLAGS "-Wall -g -pg -Wextra  -W -Wpointer-arith -Woverloaded-virtual -Wwrite-strings -pedantic -Wno-long-long")
-
-
-
 
 add_subdirectory(src)
 
