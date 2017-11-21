@@ -28,7 +28,7 @@ SET(LIBRARY_OUTPUT_PATH "${MAINFOLDER}/lib")
 
 # Add options
 option (ENABLE_MPI "Enable MPI support" NO)
-# if(USE_OPENMP)
+# if(ENABLE_MPI)
 #     set (USE_THREADS YES)
 #     find_package (OpenMP)
 #     if (OPENMP_FOUND)
@@ -40,11 +40,12 @@ option (ENABLE_MPI "Enable MPI support" NO)
 #             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 #         endif( )
 #     else (OPENMP_FOUND)
-#         message(WARNING "Cannot fullfill USE_OPENMP, compiler does not support it")
+#         message(WARNING "Cannot fullfill ENABLE_MPI, compiler does not support it")
 #     endif (OPENMP_FOUND)
-# endif(USE_OPENMP)
+# endif(ENABLE_MPI)
 
 ## Dependencies
+set( CASACORE_ROOT_DIR /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/casacore-2.4.0-py36_2)
 find_package(PkgConfig REQUIRED)
 find_package(CasaCore REQUIRED)
 find_package(LAPACK REQUIRED)
@@ -55,7 +56,7 @@ if (GLIB_PKG_FOUND)
     include_directories(${GLIB_PKG_INCLUDE_DIRS})
 endif()
 
-
+include_directories(${CASACORE_INCLUDE_DIR})
 
 ## Set libs
 set(lapackblas_libraries ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
@@ -63,9 +64,6 @@ set(lapackblas_libraries ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
 set (CMAKE_CXX_FLAGS "-Wall -g -pg -Wextra  -W -Wpointer-arith -Woverloaded-virtual -Wwrite-strings -pedantic -Wno-long-long")
 
 add_subdirectory(src)
-
-
-
 
 
 # Show summary.

@@ -1,4 +1,4 @@
-include_directories(./ ../lib)
+include_directories(./ ../lib/Radio ../lib/Dirac)
 
 FILE(GLOB SRCFILES *.cpp)
 foreach (cppfile ${SRCFILES})

@@ -23,8 +23,7 @@ foreach (object ${objects})
     # add_test (${test} ${CMAKE_SOURCE_DIR}/cmake/cmake_assay ./${test})
     # add_dependencies(check ${test})
 
-    #message("  Compiling  -->  " ${object})
-    add_library(${object}.o SHARED ${object}.c)
+    add_library(${object}.o ${object}.c)
 #    list (APPEND ALL_OBJECTS ${object})
 
 endforeach (object)

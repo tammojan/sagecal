@@ -20,10 +20,10 @@
 #include "data.h"
 // #include "sagecal.h"
 #include "Radio.h"
-#include <measures/Measures/MDirection.h>
-#include <measures/Measures/UVWMachine.h>
-#include <casa/Quanta.h>
-#include <casa/Quanta/Quantum.h>
+#include <casacore/measures/Measures/MDirection.h>
+#include <casacore/measures/Measures/UVWMachine.h>
+#include <casacore/casa/Quanta.h>
+#include <casacore/casa/Quanta/Quantum.h>
 
 /* speed of light */
 #ifndef CONST_C

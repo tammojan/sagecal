@@ -25,7 +25,9 @@
 #include <pthread.h>
 #include <casacore/casa/Quanta/Quantum.h>
 
-#include "cuda_profiler_api.h"
+#if USECUDA
+    #include "cuda_profiler_api.h"
+#endif
 
 #include <Dirac.h>
 #include <Radio.h>
