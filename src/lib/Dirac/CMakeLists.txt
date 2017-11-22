@@ -17,7 +17,7 @@ set (objects
 
 include_directories(./)
 foreach (object ${objects})
-    add_library(${object}.o ${object}.c)
+    add_library(${object} SHARED ${object}.c)
 endforeach (object)
 
 add_library(dirac ${objects} Dirac.h)
