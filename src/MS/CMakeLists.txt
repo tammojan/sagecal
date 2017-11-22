@@ -18,5 +18,5 @@ ${WCSLIB_LIBRARIES}
 -lm
 -ldirac
 #-lsagecal
--lradio
+#-lradio
 )
