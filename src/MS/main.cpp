@@ -40,6 +40,7 @@
 using namespace std;
 using namespace Data;
 
+
 void
 print_copyright(void) {
   cout<<"SAGECal 0.4.5 (C) 2011-2016 Sarod Yatawatta"<<endl;
@@ -254,7 +255,8 @@ main(int argc, char **argv) {
      srand(time(0)); /* use different seed */
     }
 
-    openblas_set_num_threads(1);//Data::Nt;
+    //openblas_set_num_threads(1);//Data::Nt;
+    // FIXME: disabled to be able to build with cmake
     /**********************************************************/
      int M,Mt,ci,cj,ck;  
    /* parameters */
