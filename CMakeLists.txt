@@ -82,3 +82,7 @@ message (STATUS "BLAS library? ......... = ${BLAS_LIBRARIES}")
 message (STATUS "GLIB-INC .............. = ${GLIB_PKG_INCLUDE_DIRS}")
 message (STATUS "GLIB-LIBS ............. = ${GLIB_PKG_LIBRARIES}")
 message (STATUS "LAPACK library? ....... = ${LAPACK_LIBRARIES}")
+
+
+## Copy test folder
+file(COPY ${PROJECT_SOURCE_DIR}/test DESTINATION ${MAINFOLDER}/dist/test)
