@@ -30,4 +30,4 @@ endforeach (object)
 
 
 
-add_library(dirac STATIC ${objects} Dirac.h)
+add_library(dirac ${objects} Dirac.h)
