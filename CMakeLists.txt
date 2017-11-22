@@ -22,8 +22,8 @@ include(CheckFunctionExists)
 
 ## Project Output Paths
 SET(MAINFOLDER ${PROJECT_SOURCE_DIR})
-SET(EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/bin")
-SET(LIBRARY_OUTPUT_PATH "${MAINFOLDER}/lib")
+SET(EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/dist/bin")
+SET(LIBRARY_OUTPUT_PATH "${MAINFOLDER}/dist/lib")
 
 
 # Add options
@@ -45,7 +45,13 @@ option (ENABLE_MPI "Enable MPI support" NO)
 # endif(ENABLE_MPI)
 
 ## Dependencies
-set( CASACORE_ROOT_DIR /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/casacore-2.4.0-py36_2)
+set(CASACORE_ROOT_DIR /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/casacore-2.4.0-py36_2)
+set(WCSLIB_INCLUDE_DIR /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/wcslib-5.16-1/include)
+set(WCSLIB_LIBRARY /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/wcslib-5.16-1/lib)
+
+## TODO: check each package status
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(CasaCore REQUIRED)
 find_package(LAPACK REQUIRED)
@@ -56,17 +62,17 @@ if (GLIB_PKG_FOUND)
     include_directories(${GLIB_PKG_INCLUDE_DIRS})
 endif()
 
-include_directories(${CASACORE_INCLUDE_DIR})
+include_directories(${CASACORE_INCLUDE_DIR} ${BLAS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR})
 
-## Set libs
-set(lapackblas_libraries ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
 ## Set flags
-set (CMAKE_CXX_FLAGS "-Wall -g -pg -Wextra  -W -Wpointer-arith -Woverloaded-virtual -Wwrite-strings -pedantic -Wno-long-long")
+set (CMAKE_CXX_FLAGS "-Wall -g -pg -Wextra -std=c++11 -W -Wpointer-arith -Woverloaded-virtual -Wwrite-strings -pedantic -Wno-long-long -O3 -ansi -fPIC -fpermissive -fno-omit-frame-pointer -DNDEBUG -fno-inline-functions -fno-inline-functions-called-once -fno-optimize-sibling-calls")
 
+
+## Add source files
 add_subdirectory(src)
 
 
-# Show summary.
+## Show summary
 message (STATUS "CMAKE_SYSTEM .......... = ${CMAKE_SYSTEM}")
 message (STATUS "CMAKE_BUILD_TYPE ...... = ${CMAKE_BUILD_TYPE}")
 message (STATUS "BUILD_SHARED_LIBS ..... = ${BUILD_SHARED_LIBS}")
@@ -75,11 +81,6 @@ message (STATUS "USE_MPI ............... = ${USE_MPI}")
 message (STATUS "USE_STACKTRACE ........ = ${USE_STACKTRACE}")
 message (STATUS "CMAKE_CXX_COMPILER .... = ${CMAKE_CXX_COMPILER}")
 message (STATUS "CMAKE_CXX_FLAGS ....... = ${CMAKE_CXX_FLAGS}")
-message (STATUS "C++11 support ......... = ${CXX11}")
 message (STATUS "BLAS library? ......... = ${BLAS_LIBRARIES}")
 message (STATUS "GLIB? ................. = ${GLIB_PKG_INCLUDE_DIRS}")
 message (STATUS "LAPACK library? ....... = ${LAPACK_LIBRARIES}")
-
-
-message (STATUS "BUILD_PYTHON .......... = ${BUILD_PYTHON}")
-message (STATUS "BUILD_PYTHON3 ......... = ${BUILD_PYTHON3}")
