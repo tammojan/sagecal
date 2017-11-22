@@ -26,8 +26,9 @@ SET(EXECUTABLE_OUTPUT_PATH "${MAINFOLDER}/dist/bin")
 SET(LIBRARY_OUTPUT_PATH "${MAINFOLDER}/dist/lib")
 
 
-# Add options
+## Add options
 option (ENABLE_MPI "Enable MPI support" NO)
+## TODO: add MPI option
 # if(ENABLE_MPI)
 #     set (USE_THREADS YES)
 #     find_package (OpenMP)
@@ -45,10 +46,6 @@ option (ENABLE_MPI "Enable MPI support" NO)
 # endif(ENABLE_MPI)
 
 ## Dependencies
-#set(CASACORE_ROOT_DIR /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/casacore-2.4.0-py36_2)
-#set(WCSLIB_INCLUDE_DIR /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/wcslib-5.16-1/include)
-#set(WCSLIB_LIBRARY /home/fdiblen/.pyenv/versions/anaconda3-4.3.1/pkgs/wcslib-5.16-1/lib)
-
 ## TODO: check each package status
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
@@ -77,10 +74,11 @@ message (STATUS "CMAKE_SYSTEM .......... = ${CMAKE_SYSTEM}")
 message (STATUS "CMAKE_BUILD_TYPE ...... = ${CMAKE_BUILD_TYPE}")
 message (STATUS "BUILD_SHARED_LIBS ..... = ${BUILD_SHARED_LIBS}")
 message (STATUS "CMAKE_INSTALL_NAME_DIR  = ${CMAKE_INSTALL_NAME_DIR}")
-message (STATUS "USE_MPI ............... = ${USE_MPI}")
+message (STATUS "ENABLE_MPI ............... = ${ENABLE_MPI}")
 message (STATUS "USE_STACKTRACE ........ = ${USE_STACKTRACE}")
 message (STATUS "CMAKE_CXX_COMPILER .... = ${CMAKE_CXX_COMPILER}")
 message (STATUS "CMAKE_CXX_FLAGS ....... = ${CMAKE_CXX_FLAGS}")
 message (STATUS "BLAS library? ......... = ${BLAS_LIBRARIES}")
-message (STATUS "GLIB? ................. = ${GLIB_PKG_INCLUDE_DIRS}")
+message (STATUS "GLIB-INC .............. = ${GLIB_PKG_INCLUDE_DIRS}")
+message (STATUS "GLIB-LIBS ............. = ${GLIB_PKG_LIBRARIES}")
 message (STATUS "LAPACK library? ....... = ${LAPACK_LIBRARIES}")
