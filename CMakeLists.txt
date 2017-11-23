@@ -9,7 +9,7 @@ set(PROJECT_VERSION
 
 
 cmake_minimum_required (VERSION 2.8)
-list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake)
+list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/CMakeModules)
 
 include(CheckCXXCompilerFlag)
 include(CheckCCompilerFlag)
@@ -51,15 +51,19 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(CasaCore REQUIRED)
+find_package(CFITSIO REQUIRED)
 find_package(LAPACK REQUIRED)
 find_package(BLAS REQUIRED)
+find_package(GFortranLibs REQUIRED)
+
 
 pkg_check_modules(GLIB_PKG glib-2.0)
 if (GLIB_PKG_FOUND)
     include_directories(${GLIB_PKG_INCLUDE_DIRS})
 endif()
 
-include_directories(${CASACORE_INCLUDE_DIR} ${BLAS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR})
+include_directories(${CASACORE_INCLUDE_DIR} ${CFITSIO_INCLUDE_DIRS} ${BLAS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR} ${GFORTRAN_INCLUDE_DIR})
+
 
 ## Set flags
 set (CMAKE_CXX_FLAGS "-Wall -g -pg -Wextra -std=c++11 -W -Wpointer-arith -Woverloaded-virtual -Wwrite-strings -pedantic -Wno-long-long -O3 -ansi -fPIC -fpermissive -fno-omit-frame-pointer -DNDEBUG -fno-inline-functions -fno-inline-functions-called-once -fno-optimize-sibling-calls")
@@ -74,15 +78,17 @@ message (STATUS "CMAKE_SYSTEM .......... = ${CMAKE_SYSTEM}")
 message (STATUS "CMAKE_BUILD_TYPE ...... = ${CMAKE_BUILD_TYPE}")
 message (STATUS "BUILD_SHARED_LIBS ..... = ${BUILD_SHARED_LIBS}")
 message (STATUS "CMAKE_INSTALL_NAME_DIR  = ${CMAKE_INSTALL_NAME_DIR}")
-message (STATUS "ENABLE_MPI ............... = ${ENABLE_MPI}")
+message (STATUS "ENABLE_MPI ............ = ${ENABLE_MPI}")
 message (STATUS "USE_STACKTRACE ........ = ${USE_STACKTRACE}")
 message (STATUS "CMAKE_CXX_COMPILER .... = ${CMAKE_CXX_COMPILER}")
 message (STATUS "CMAKE_CXX_FLAGS ....... = ${CMAKE_CXX_FLAGS}")
-message (STATUS "BLAS library? ......... = ${BLAS_LIBRARIES}")
+message (STATUS "BLAS-LIBS ............. = ${BLAS_LIBRARIES}")
 message (STATUS "GLIB-INC .............. = ${GLIB_PKG_INCLUDE_DIRS}")
 message (STATUS "GLIB-LIBS ............. = ${GLIB_PKG_LIBRARIES}")
-message (STATUS "LAPACK library? ....... = ${LAPACK_LIBRARIES}")
-
+message (STATUS "LAPACK-INC ............ = ${LAPACK_INCLUDE_DIR}")
+message (STATUS "LAPACK-LIBS ........... = ${LAPACK_LIBRARIES}")
+message (STATUS "GFORTRAN-INC  ......... = ${GFORTRAN_INCLUDE_DIR}")
+message (STATUS "GFORTRAN-LIBS ......... = ${LIBGFORTRAN_LIBRARIES}")
 
 ## Copy test folder
 file(COPY ${PROJECT_SOURCE_DIR}/test DESTINATION ${MAINFOLDER}/dist/test)

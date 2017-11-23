@@ -12,13 +12,17 @@ FILE(GLOB SRCFILES *.cpp)
 add_executable(sagecal ${SRCFILES})
 
 target_link_libraries(sagecal
-${CASACORE_LIBRARIES}
-${BLAS_LIBRARIES}
-${LAPACK_LIBRARIES}
-${WCSLIB_LIBRARIES}
-${GLIB_PKG_LIBRARIES}
--lpthread
--lm
--ldirac
--lradio
+ ${CASACORE_LIBRARIES}
+ ${CFITSIO_LIBRARIES}
+ ${BLAS_LIBRARIES}
+ ${LAPACK_LIBRARIES}
+ ${WCSLIB_LIBRARIES}
+ ${GLIB_PKG_LIBRARIES}
+ ${LIBGFORTRAN_LIBRARIES}
+ -lpthread
+ -lcfitsio
+ -lgfortran
+ -lm
+ -ldirac
+ -lradio
 )
