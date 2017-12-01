@@ -1,6 +1,6 @@
 CC=gcc
 CXX=g++
-CFLAGS= -Wall -O3 -g -pg
+CFLAGS= -Wall -O3 -g -pg 
 # CFLAGS= -Wall -O3 -fopt-info-optimized
 CLIBS= -lm -lpthread
 #LAPACK=-L/usr/lib/atlas/sse -llapack -lblas
